@@ -80,6 +80,24 @@ class Air
     // ##########################################
 
     /**
+     * @param $data
+     * @return mixed
+     */
+    private function _jsonDecodeData($data)
+    {
+        $json = json_decode($data, true);
+
+        if ($json === NULL)
+        {
+            return $data;
+        }
+
+        return $json;
+    }
+
+    // ##########################################
+
+    /**
      * @param $domain
      * @return Air
      */
@@ -324,7 +342,7 @@ class Air
             ->setReturnTransfer(TRUE)
             ->execute();
 
-        return $response;
+        return $this->_jsonDecodeData($response);
     }
 
     // ##########################################
